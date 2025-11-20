@@ -16,7 +16,6 @@ module character (
     output logic [9:0] char_height  // Character height (for collision/sprites)
 );
 
-    
 
 endmodule
 
