@@ -2,6 +2,7 @@ module controller (
     output logic latch,
     output logic clock,
     output logic [7:0] LED,
+    output logic [7:0] buttons,
     input logic data
 );
     //clock reference from online github repo about fpga clock setup

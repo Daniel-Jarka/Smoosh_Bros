@@ -4,7 +4,8 @@ module vga (
     output logic vsync,
     output logic [9:0] col,  
     output logic [9:0] row,    
-    output logic valid      
+    output logic valid,
+    output logic frame_tick 
 );
 
     localparam H_SYNC = 96;
@@ -34,6 +35,9 @@ module vga (
         end else begin
             col_count <= col_count + 1;
         end
+        
+        // Frame tick: pulses high when both counters are 0 (start of new frame)
+        frame_tick <= (col_count == 0) && (row_count == 0);
     end
 
     assign hsync = ~((col_count >= H_VAREA + H_FRONTP) && (col_count < H_VAREA + H_FRONTP + H_SYNC));
