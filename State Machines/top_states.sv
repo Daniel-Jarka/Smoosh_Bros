@@ -9,7 +9,7 @@ module top_states (
     input logic btn_right,
     output logic x_velocity, // need to decide bit amount (probably 8 bits)
     output logic y_velocity, // need to decide bit amount (probably 8 bits)
-    output logic current_animation // havent decided bit amount
+    output logic anim_ID // havent decided bit amount
 );
 
 // we input all these into the sub FSM modules
@@ -37,6 +37,7 @@ always_comb begin
     else current_state = MOVE;
 end
 
+// we will have the the ouputs for all our states here
 always_comb begin
 
 case(current_state)
@@ -44,7 +45,7 @@ case(current_state)
 default begin
     x_velocity = 0;
     y_velocity = 0;
-    current_animation = idle_anim;
+    anim_ID = idle_anim;
 end
 endcase
 
