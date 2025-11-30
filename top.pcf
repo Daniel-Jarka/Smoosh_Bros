@@ -11,3 +11,8 @@ set_io rgb[2] 32
 set_io rgb[3] 35
 set_io rgb[4] 31
 set_io rgb[5] 37
+
+# Controller Pins (User must verify these!)
+# set_io latch  <PIN>
+# set_io ctrl_clk <PIN>
+# set_io data   <PIN>

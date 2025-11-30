@@ -1,7 +1,10 @@
 module top (
   output logic hsync,
   output logic vsync,
-  output logic [5:0] rgb
+  output logic [5:0] rgb,
+  output logic latch,
+  output logic ctrl_clk,
+  input logic data
 );
   
 
@@ -61,6 +64,28 @@ logic clk_out;
     .frame_tick(frame_rate)
   );
 
+  logic [7:0] buttons;
+  logic button_up, button_down, button_left, button_right;
+  logic button_select, button_start, button_B, button_A;
+  logic [7:0] LED;
+
+  controller u_controller (
+      .latch(latch),
+      .clock(ctrl_clk),
+      .LED(LED),
+      .buttons(buttons),
+      .button_up(button_up),
+      .button_down(button_down),
+      .button_left(button_left),
+      .button_right(button_right),
+      .button_select(button_select),
+      .button_start(button_start),
+      .button_B(button_B),
+      .button_A(button_A),
+      .data(data),
+      .clk(clk_in)
+  );
+
     localparam int TILE_SIZE = 8;
     localparam int TILES_X = 640 / TILE_SIZE;  // = 80
 
@@ -92,16 +117,18 @@ logic clk_out;
       char_addr <= next_char_addr;
       inside_char_tile <= inside_char_tile_next;
     end
-    logic [6:0] new_x;
-    logic [6:0] new_y;
+    logic [9:0] new_x = 100;
+    logic [9:0] new_y = 100;
     typedef enum logic [1:0] {S1, S2, S3, S4} anim_state;
     anim_state state, next_state;
     always_ff @(posedge counter[23]) begin
       state <= next_state;
     end
     always_ff @(posedge frame_rate) begin
-      new_x <= new_x + 1;
-      new_y <= new_y + 1;
+      if (button_right && new_x < 600) new_x <= new_x + 1;
+      if (button_left && new_x > 0) new_x <= new_x - 1;
+      if (button_down && new_y < 440) new_y <= new_y + 1;
+      if (button_up && new_y > 0) new_y <= new_y - 1;
     end
 
     always_comb begin
