@@ -1,18 +1,18 @@
-module main_plt_collision #(
+module plt3_collision #(
     parameter WIDTH = 23,
     parameter HEIGHT = 30
     )(
     input logic [9:0] x_pos,
     input logic [9:0] y_pos,
     input logic [9:0] next_y,
-    output logic touching_platform1
+    output logic touching_platform3
 );
-localparam int PLATFORM_Y = 380;
-localparam int PLATFORM_X = 110;
-localparam int PLT_WIDTH = 420;
+localparam int PLATFORM_Y = 215;
+localparam int PLATFORM_X = 120;
+localparam int PLT_WIDTH = 105;
 
 always_comb begin
-    touching_platform1 =
+    touching_platform3 =
         // character's bottom crossing platform top
         (y_pos + HEIGHT*2 <= PLATFORM_Y) &&      // was above the platform last frame
         (next_y + HEIGHT*2 >= PLATFORM_Y) &&     // will go past the platform top this frame

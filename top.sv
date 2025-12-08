@@ -72,8 +72,8 @@ logic clk_out;
 
     logic facing_right1;
     logic facing_right2;
-    logic [9:0] plt_x = 20;
-    logic [9:0] plt_y = 410;
+    logic [9:0] plt_x;
+    logic [9:0] plt_y;
 
     // frame refresh
     logic frame_rate;
@@ -148,15 +148,15 @@ logic clk_out;
                                                                ((((row - char_y2)>>1) + anim_row2)* koopa_max_width_2) + (((col - char_x2)>>1) + anim_col2)
                                           : 0;
       // platform drawing
-      inside_plt_tile_next = (col >= plt_x && col < plt_x + 400 && row >= plt_y && row < plt_y + 9);
-      next_plt_addr = inside_plt_tile_next ? (((row - plt_y))* 100) + (((col - plt_x))): 0;
+      inside_plt_tile_next = (col >= plt_x && col < plt_x + 420 && row >= plt_y && row < plt_y + 9);
+      // next_plt_addr = inside_plt_tile_next ? (((row - plt_y))* 100) + (((col - plt_x))): 0;
 
       if (inside_char_tile1 && char_rgb1 != 6'b110011 && player1_alive) begin
         next_final_rgb = char_rgb1;
       end else if (inside_char_tile2 && char_rgb2 != 6'b110011 && player2_alive) begin
         next_final_rgb = char_rgb2;
-      end else if (inside_plt_tile) begin 
-        next_final_rgb = plt_rgb;
+      // end else if (inside_plt_tile) begin 
+      //   next_final_rgb = plt_rgb;
       end else begin
         next_final_rgb = tile_rgb;
       end
@@ -234,8 +234,8 @@ movement_state player2_move_state;
 movement_FSM #(
   .WIDTH(23),
   .HEIGHT(30),
-  .INITIAL_X(375),
-  .INITIAL_Y(300)
+  .INITIAL_X(420),
+  .INITIAL_Y(380)
 ) player2_movement (
   .clk(clk_out),
   .player(0),
@@ -256,8 +256,8 @@ movement_state player1_move_state;
 movement_FSM #(
   .WIDTH(23),
   .HEIGHT(30),
-  .INITIAL_X(50),
-  .INITIAL_Y(290)
+  .INITIAL_X(120),
+  .INITIAL_Y(380)
 ) player1_movement (
   .clk(clk_out),
   .player(1),
@@ -323,11 +323,11 @@ ROM_koopa_animations_23x30 u_koopa_rom_2(
   .rgb(next_char_rgb2)
 );
 
-ROM_platform u_platform_rom (
-  .clk(clk_out),
-  .addr(plt_addr),
-  .rgb(next_plt_rgb)
-);
+// ROM_platform u_platform_rom (
+//   .clk(clk_out),
+//   .addr(plt_addr),
+//   .rgb(next_plt_rgb)
+// );
 
 // ROM instance
 ROM_Screen u_rom (
