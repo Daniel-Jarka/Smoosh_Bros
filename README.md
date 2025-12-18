@@ -66,35 +66,6 @@ NES-style digital controllers supported through hardware interface.
 
 ---
 
-## Project Structure
-
-Smoosh_Bros/
-│
-├── top.sv # Top-level game engine + VGA pipeline
-│
-├── pcs/
-│ └── top.pcf # FPGA pin constraints
-│
-├── VGA/
-│ ├── vga_controller.sv # VGA timing generator
-│ └── vga_sync.sv
-│
-├── Sprites/
-│ ├── char_rom.sv # Character sprites
-│ ├── platform_rom.sv # Stage platforms
-│ └── background_rom.sv # Background image
-│
-├── State Machines/
-│ ├── movement_FSM.sv # Velocity, gravity, movement state machine
-│ ├── attack_FSM.sv # Attack timing + hitbox activation
-│ ├── shield_FSM.sv # Shield decay + cooldown logic
-│ └── top_states.sv # Animation selector + master state coordination
-│
-└── Controllers/
-└── nes_controller.sv # Controller interface + debouncing
-
----
-
 ## FPGA Pin Assignments
 
 # VGA sync signals
