@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🍄 **Smoosh Bros**
+# **Smoosh Bros**
 
 ### A Super Smash Bros–style two-player fighting game built entirely in **SystemVerilog** on an **FPGA**  
 **640×480 VGA • Hardware Sprites • Real-Time Physics • Fully Parallel Game Engine**
@@ -166,6 +166,6 @@ Planned extensions include:
 
 <div align="center">
 
-Made by Vaughan, Andrew, Jonah, and Daniel 👾  
+Made by Vaughan, Andrew, Jonah, and Daniel 
 
 </div>
